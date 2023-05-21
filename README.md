@@ -31,10 +31,10 @@ Outputs of 'main' file:
 	- The error twist 'Xerr' .csv data file.
 	- A plot of the six elements of the twist error 'Xerr' as a function of time.
 
-*** Singularity Avoidance \\
-Approach: Ignore any requested twist components in directions that the near-singularity renders difficult to achieve.
-Detail: In 'subTwistToCommand' function in 'manipulation' file, treating small singular values (that are greater than the default tolerance) of the pseudoinverse of the Jacobian 'Je' as zero, this will avoid having pseudoinverse matrices with unreasonably large entries. 
+*** Singularity Avoidance ***
+- Approach: Ignore any requested twist components in directions that the near-singularity renders difficult to achieve.
+- Detail: In 'subTwistToCommand' function in 'manipulation' file, treating small singular values (that are greater than the default tolerance) of the pseudoinverse of the Jacobian 'Je' as zero, this will avoid having pseudoinverse matrices with unreasonably large entries. 
 
-*** Self-Collisions Avoidance
-Approach: Implement heuristic joint limits
-Detail: Using the arm joint angle sliders in 'Scene 3: Interactive youBot' to approximately find the joint-angle combinations that avoid self-collision. This joint limits are implemented in 'testJointLimits' function in 'manipulation' file. Then, each time the wheel and arm joint speeds are calculated using the pseudoinverse, use 'testJointLimits' function to check if the new configuration at a time 'dt' later will violate the joint limits. If so, the controls are recalculated by first changing the Jacobian 'Je' to indicate that the offending joint(s) should not be used---the robot must use other joints (if possible) to generate the desired end-effector twist 'V'. To recalculate the controls, each column of 'Je' corresponding to an offending joint is changed to all zeros. This indicates that moving these joints causes no motion at the end-effector, so the pseudoinverse solution will not request any motion from these joints.
+*** Self-Collisions Avoidance ***
+- Approach: Implement heuristic joint limits
+- Detail: Using the arm joint angle sliders in 'Scene 3: Interactive youBot' to approximately find the joint-angle combinations that avoid self-collision. This joint limits are implemented in 'testJointLimits' function in 'manipulation' file. Then, each time the wheel and arm joint speeds are calculated using the pseudoinverse, use 'testJointLimits' function to check if the new configuration at a time 'dt' later will violate the joint limits. If so, the controls are recalculated by first changing the Jacobian 'Je' to indicate that the offending joint(s) should not be used---the robot must use other joints (if possible) to generate the desired end-effector twist 'V'. To recalculate the controls, each column of 'Je' corresponding to an offending joint is changed to all zeros. This indicates that moving these joints causes no motion at the end-effector, so the pseudoinverse solution will not request any motion from these joints.
