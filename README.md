@@ -11,8 +11,8 @@ Code Files:
 
 Inputs of 'main' file:
 - three default cases are implemented (setting: case = 1, 2, or 3)
-	- case = 1 'best': use a well-tuned controller (feedforward-plus-P) to solve a pick-and-place task where the initial and final configurations of the cube 				are at the default locations.
-	- case = 2 'overshoot': use  less-well-tuned controller, one that exhibits overshoot and a bit of oscillation (feedforward-plus-PI) to solve a pick-and-				place task where the initial and final configurations of the cube are at the default locations.
+	- case = 1 'best': use a well-tuned controller (feedforward-plus-P) to solve a pick-and-place task where the initial and final configurations of the cube are at the default locations.
+	- case = 2 'overshoot': use  less-well-tuned controller, one that exhibits overshoot and a bit of oscillation (feedforward-plus-PI) to solve a pick-and-place task where the initial and final configurations of the cube are at the default locations.
 	- case = 3 'newTask': use a feedforward-plus-PI controller to solve a pick-and-place task with different initial and final block configurations.
 - alternatively, users can specify parameters:
 	- cube's initial configuration: 'init_cube_config', 'final_cube_config'
@@ -31,7 +31,7 @@ Outputs of 'main' file:
 	- The error twist 'Xerr' .csv data file.
 	- A plot of the six elements of the twist error 'Xerr' as a function of time.
 
-*** Singularity Avoidance
+*** Singularity Avoidance \\
 Approach: Ignore any requested twist components in directions that the near-singularity renders difficult to achieve.
 Detail: In 'subTwistToCommand' function in 'manipulation' file, treating small singular values (that are greater than the default tolerance) of the pseudoinverse of the Jacobian 'Je' as zero, this will avoid having pseudoinverse matrices with unreasonably large entries. 
 
